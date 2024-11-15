@@ -1,6 +1,7 @@
 """Contains functions to load the GDSC1, GDSC2, CCLE, and Toy datasets."""
 
 import os
+from pathlib import Path
 from typing import Callable
 
 import pandas as pd
@@ -92,6 +93,17 @@ def load_toy(path_data: str = "data") -> DrugResponseDataset:
     )
 
 
+def load_custom(path_data: str = "data", dataset_name: str = "custom") -> DrugResponseDataset:
+    """
+    Loads a user-provided dataset.
+
+    :param path_data: Path to the dataset.
+    :param dataset_name: Custom name for the dataset. Defaults to "custom".
+    :return: DrugResponseDataset containing response, cell line IDs, and drug IDs.
+    """
+    return DrugResponseDataset.from_csv(os.path.join(path_data, dataset_name, "custom.csv"))
+
+
 AVAILABLE_DATASETS: dict[str, Callable] = {
     "GDSC1": load_gdsc1,
     "GDSC2": load_gdsc2,
@@ -101,16 +113,25 @@ AVAILABLE_DATASETS: dict[str, Callable] = {
 
 
 @pipeline_function
-def load_dataset(dataset_name: str, path_data: str = "data") -> DrugResponseDataset:
+def load_dataset(dataset_name: str, path_data: str | Path = "data") -> DrugResponseDataset:
     """
-    Load a dataset based on the dataset name.
+    Load a dataset based on the dataset name and / or a provided path to a locally stored dataset.
 
-    :param dataset_name: The name of the dataset to load ('GDSC1', 'GDSC2', 'CCLE', or 'Toy_Data').
-    :param path_data: The path to the dataset.
+    When providing a dataset_name that is one of 'GDSC1', 'GDSC2', 'CCLE', 'Toy_Data', the function will
+    attempt to load this dataset from an online resource.
+    Otherwise, a custom dataset is loaded from the provided path. If this path does not exist, a
+    FileNotFoundError will be thrown.
+
+    :param dataset_name: The name of a supported dataset to load ('GDSC1', 'GDSC2', 'CCLE', or 'Toy_Data')
+        or a custom dataset that is located at path_data
+    :param path_data: The path where to load a supported dataset to, or where a custom dataset is located.
     :return: A DrugResponseDataset containing response, cell line IDs, drug IDs, and dataset name.
-    :raises ValueError: If the dataset name is unknown.
+    :raises FileNotFoundError: If the dataset_name is not one of 'GDSC1', 'GDSC2', 'CCLE', 'Toy_Data'
+        and the provided path does not point to a custom file.
+
     """
     if dataset_name in AVAILABLE_DATASETS:
         return AVAILABLE_DATASETS[dataset_name](path_data)  # type: ignore
-    else:
-        raise ValueError(f"Unknown dataset name: {dataset_name}")
+    if Path(path_data).exists():
+        return load_custom(path_data, dataset_name)
+    raise FileNotFoundError(f"The dataset with name {dataset_name} at {path_data} does not exist.")
