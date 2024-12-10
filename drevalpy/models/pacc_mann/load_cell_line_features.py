@@ -6,11 +6,11 @@ from ..utils import load_and_reduce_gene_features
 
 def load_cell_line_features(data_path: str, dataset_name: str) -> FeatureDataset:
     """
-    Loads the cell line gene expression features using provided gene list from a pickle file.
+    Lädt die Genexpressionsmerkmale der Zelllinie unter Verwendung der bereitgestellten Genliste aus .pkl-Datei
 
-    :param data_path: Path to the data directory.
-    :param dataset_name: Name of the dataset, e.g., GDSC2.
-    :returns: FeatureDataset with reduced and filtered features based on the gene list from the pickle file.
+    :param data_path: Pfad zum Datenverzeichnis
+    :param dataset_name: Name des Datensatzes; GDSC2
+    :returns: FeatureDataset mit reduzierten und gefilterten Merkmalen basierend auf der Genliste aus .pkl-Datei
     """
     
     # Lade die Gene aus der 2128_genes.pkl Datei
