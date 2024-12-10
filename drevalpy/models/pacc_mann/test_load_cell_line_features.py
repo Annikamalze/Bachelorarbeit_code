@@ -1,4 +1,4 @@
-from drevalpy.models.pacc_mann import load_cell_line_features  
+from drevalpy import load_cell_line_features  
 
 # Definiere Testpfade
 data_path = "data/GDSC2"
