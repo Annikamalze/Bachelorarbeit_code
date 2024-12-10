@@ -1,4 +1,4 @@
-from drevalpy import load_cell_line_features  # Importiere die Funktion aus deinem Code
+import load_cell_line_features  
 
 # Definiere Testpfade
 data_path = "data/GDSC2"
