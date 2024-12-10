@@ -1,0 +1,26 @@
+import os
+from abc import ABC
+#from drevalpy.datasets.dataset import FeatureDataset
+from PaccMann_v2 import load_specific_genes_features  
+
+def main():
+    # Parameter festlegen
+    data_path = "./"  # Pfad, wo sich die Datensätze befinden
+    dataset_name = "gene_expression_data"  # Beispiel-Datensatzname
+    genes_file = "2128_genes.pkl"  # Dateiname mit spezifischen Genen
+
+    # Prüfen, ob die Gene-Datei existiert
+    if not os.path.exists(os.path.join(data_path, genes_file)):
+        print(f"Die Datei {genes_file} wurde nicht im Verzeichnis {data_path} gefunden.")
+        return
+
+    # Funktion aufrufen
+    try:
+        features = load_specific_genes_features(data_path=data_path, dataset_name=dataset_name)
+        print("Erfolgreich geladen!")
+        print(features)
+    except Exception as e:
+        print(f"Fehler: {e}")
+
+if __name__ == "__main__":
+    main()
