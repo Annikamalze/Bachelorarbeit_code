@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import pickle
 from drevalpy.datasets.dataset import FeatureDataset
-from ..utils import load_and_reduce_gene_features
+from dreval.models.utils import load_and_reduce_gene_features
 
 def load_cell_line_features(data_path: str, dataset_name: str) -> FeatureDataset:
     """
