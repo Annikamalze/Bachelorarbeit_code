@@ -11,7 +11,7 @@ class SMILESEmbedding(nn.Module):
     PaccMann model https://github.com/PaccMann/paccmann_predictor.
     """
 
-    def __init__(self, smiles_vocabulary_path, smiles_embedding_size, smiles_files=None, scale_grad_by_freq=False):
+    def _init_(self, smiles_vocabulary_path, smiles_embedding_size, smiles_files=None, scale_grad_by_freq=False):
         """
         SMILES-Einbettung
         :param smiles_vocabulary_path: Pfad zur Vokabel-Datei 
@@ -19,7 +19,7 @@ class SMILESEmbedding(nn.Module):
         :param smiles_files: Optional: Liste von SMILES-Dateien, um Vokabular zu erstellen
         :param scale_grad_by_freq: Skalierung der Gradienten basierend auf Häufigkeit. Default = False
         """
-        super(SMILESEmbedding, self).__init__()
+        super(SMILESEmbedding, self)._init_()
 
         if not os.path.exists(smiles_vocabulary_path):
             if smiles_files is None:
@@ -102,7 +102,7 @@ class SMILESEmbedding(nn.Module):
 
     def forward(self, smiles_indices):
         """
-        Führt das Einbetten für gegebene SMILES-Indizes aus
+        Führt Einbetten für gegebene SMILES-Indizes aus
         :param smiles_indices: Tensor mit den integerisierten SMILES-Indizes
         :return: Tensor mit den eingebetteten SMILES
         """
