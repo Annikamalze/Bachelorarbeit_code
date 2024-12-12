@@ -16,17 +16,17 @@ def test_smiles_embedding():
     # Testen mit Beispiel-SMILES
     smiles_list = ["CCO", "CCN"]
     processed_smiles = model.preprocess_smiles(smiles_list)
-    print("Processed SMILES:", processed_smiles)
+    #print("Processed SMILES:", processed_smiles)
     # Daten aus Datei:
     # with open('C:/Users/Annika/paccmann_predictor/data/smiles/deine_testdatei.smi', 'r') as f:
     # smiles_list = [line.strip() for line in f]
     
     output_file = 'processed_smiles.csv'
     model.save_to_csv(processed_smiles, output_file)
-    print(f"Processed SMILES saved to {output_file}")
+    #print(f"Processed SMILES saved to {output_file}")
     
     embedded_smiles = model(processed_smiles)
-    print("Embedded SMILES:", embedded_smiles)
+    #print("Embedded SMILES:", embedded_smiles)
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     test_smiles_embedding()
