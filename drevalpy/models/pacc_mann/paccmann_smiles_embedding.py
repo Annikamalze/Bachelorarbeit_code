@@ -11,7 +11,8 @@ class SMILESEmbedding(nn.Module):
     PaccMann model https://github.com/PaccMann/paccmann_predictor.
     """
 
-    def _init_(self, smiles_vocabulary_path, smiles_embedding_size, smiles_files=None, scale_grad_by_freq=False):
+    def __init__(self, smiles_vocabulary_path, smiles_embedding_size, smiles_files=None, scale_grad_by_freq=False):
+
         """
         SMILES-Einbettung
         :param smiles_vocabulary_path: Pfad zur Vokabel-Datei 
@@ -19,7 +20,8 @@ class SMILESEmbedding(nn.Module):
         :param smiles_files: Optional: Liste von SMILES-Dateien, um Vokabular zu erstellen
         :param scale_grad_by_freq: Skalierung der Gradienten basierend auf Häufigkeit. Default = False
         """
-        super(SMILESEmbedding, self)._init_()
+        super(SMILESEmbedding, self).__init__()
+
 
         if not os.path.exists(smiles_vocabulary_path):
             if smiles_files is None:
