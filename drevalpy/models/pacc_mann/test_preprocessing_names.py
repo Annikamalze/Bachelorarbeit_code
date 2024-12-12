@@ -24,7 +24,7 @@ def test_smiles_embedding():
                 smiles_data.append((name, smiles))
     
     # Verarbeiten der SMILES
-    names = [entry[0] for entry in smiles_data]
+    names = [entry[0].capitalize() for entry in smiles_data]
     smiles_list = [entry[1] for entry in smiles_data]
     processed_smiles = model.preprocess_smiles(smiles_list)
     
