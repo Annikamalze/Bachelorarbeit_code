@@ -17,13 +17,12 @@ class PaccMann:
         :returns: FeatureDataset mit den Medikamenten-SMILES
         """
         if dataset_name == "GDSC2":
-            smiles_file = "processed_smiles_gdsc2.csv"  # SMILES-Datei für GDSC2
+            smiles_file = "processed_smiles_gdsc2.csv" 
         elif dataset_name == "CCLE":
-            smiles_file = "processed_smiles_ccle.csv"  # SMILES-Datei für eine andere Datenbank
+            smiles_file = "processed_smiles_ccle.csv"  
         else:
             raise ValueError(f"Unbekanntes Dataset: {dataset_name}")
 
-        # Lade die entsprechende SMILES-Datei basierend auf dem Dataset
         smiles = pd.read_csv(os.path.join(data_path, dataset_name, smiles_file), index_col=0)
 
         return FeatureDataset(

@@ -8,7 +8,7 @@ data/CCLE
 data/Toy_Data
 data/*
 drevalpy/data/
-
+drevalpy/models/pacc_mann/data
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
