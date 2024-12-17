@@ -47,3 +47,6 @@ if __name__ == "__main__":
     try:
         feature_dataset = model.load_drug_features(data_path, dataset_name)
         print("Daten erfolgreich geladen.")
+    except Exception as e:
+    # Fehlerbehandlung
+    print(f"Es gab einen Fehler: {e}")
