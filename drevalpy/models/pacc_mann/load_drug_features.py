@@ -47,9 +47,3 @@ if __name__ == "__main__":
     try:
         feature_dataset = model.load_drug_features(data_path, dataset_name)
         print("Daten erfolgreich geladen.")
-        print("Geladene Daten (Vorschau):")
-        print(feature_dataset.features)  # Ausgabe der SMILES-Merkmale
-        
-    except Exception as e:
-        print(f"Fehler beim Laden der Daten: {e}")
-
