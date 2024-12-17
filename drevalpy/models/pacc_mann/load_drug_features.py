@@ -49,3 +49,9 @@ if __name__ == "__main__":
         print("Daten erfolgreich geladen.")
     except Exception as e:
         print(f"Fehler beim Laden der Daten: {e}")
+
+ print("Geladene Daten (Vorschau):")
+        print(feature_dataset.features)  # Ausgabe der SMILES-Merkmale
+        
+    except Exception as e:
+        print(f"Fehler beim Laden der Daten: {e}")
