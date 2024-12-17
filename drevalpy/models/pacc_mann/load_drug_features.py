@@ -40,7 +40,7 @@ class PaccMann:
         return self.load_drug_smiles_features(data_path, dataset_name)
 
 if __name__ == "__main__":
-    data_path = "C:/Users/Annika/Bachelorarbeit_code/drevalpy/data"
+    data_path = "./data/GDSC2/processed_smiles_gdsc2.csv"
     dataset_name = "GDSC2"
     model = PaccMann()
     
