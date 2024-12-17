@@ -40,18 +40,16 @@ class PaccMann:
         return self.load_drug_smiles_features(data_path, dataset_name)
 
 if __name__ == "__main__":
-    data_path = "../../data"  # Korrigierter Pfad: zeigt nur auf den Ordner
+    data_path = "../../data"
     dataset_name = "GDSC2"
     model = PaccMann()
     
     try:
         feature_dataset = model.load_drug_features(data_path, dataset_name)
         print("Daten erfolgreich geladen.")
-    except Exception as e:
-        print(f"Fehler beim Laden der Daten: {e}")
-
- print("Geladene Daten (Vorschau):")
+        print("Geladene Daten (Vorschau):")
         print(feature_dataset.features)  # Ausgabe der SMILES-Merkmale
         
     except Exception as e:
         print(f"Fehler beim Laden der Daten: {e}")
+
