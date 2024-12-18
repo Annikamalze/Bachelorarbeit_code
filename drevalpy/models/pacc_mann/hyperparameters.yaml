@@ -1,0 +1,42 @@
+---
+PaccMannV2:
+  smiles_padding_length:
+    - 120
+  smiles_embedding_size:
+    - 128
+  smiles_vocabulary_size:
+    - 50
+  activation_fn:
+    - relu
+  batch_norm:
+    - true
+  dropout:
+    - 0.5
+  filters:
+    - 64
+    - 64
+    - 64
+  kernel_sizes:
+    - [3, 128]
+    - [5, 128]
+    - [11, 128]
+  molecule_heads:
+    - 4
+    - 4
+    - 4
+    - 4
+  stacked_dense_hidden_sizes:
+    - 1024
+    - 512
+  smiles_attention_size:
+    - 64
+  gene_attention_size:
+    - 1
+  number_of_genes:
+    - 2128
+  learning_rate:
+    - 0.001
+  epochs:
+    - 50
+  margin:
+    - 1.5

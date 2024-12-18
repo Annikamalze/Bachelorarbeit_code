@@ -64,13 +64,13 @@ def load_and_reduce_gene_features(
     if missing_genes:
         missing_genes_list = list(missing_genes)
         if len(missing_genes_list) > 10:
-            raise ValueError(
-                f"The following genes are missing from the dataset {dataset_name} for {feature_type}: "
+            print(
+                f"Warning: The following genes are missing from the dataset {dataset_name} for {feature_type}: "
                 f"{', '.join(missing_genes_list[:10])}, ... ({len(missing_genes)} genes in total)"
             )
         else:
-            raise ValueError(
-                f"The following genes are missing from the dataset {dataset_name} for {feature_type}: "
+            print(
+                f"Warning: The following genes are missing from the dataset {dataset_name} for {feature_type}: "
                 f"{', '.join(missing_genes_list)}"
             )
 

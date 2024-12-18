@@ -23,15 +23,12 @@ def test_load_cell_line_features():
     data_path = "data/GDSC2"
     dataset_name = "gene_expression"
     gene_list_path = os.path.join(data_path, "2128_genes.csv")  
+    genes = load_cell_line_features(data_path, dataset_name, gene_list_path)
+    if genes:
+        print(f"Erfolgreich Gene geladen.")
+    else:
+        print("Keine Gene geladen.")
 
-    try:
-        genes = load_cell_line_features(data_path, dataset_name, gene_list_path)
-        if genes:
-            print(f"Erfolgreich {len(genes)} Gene geladen.")
-        else:
-            print("Keine Gene geladen.")
-    except Exception as e:
-        print("Es gab einen Fehler:", e)
 
 if __name__ == "__main__":
     test_load_cell_line_features()

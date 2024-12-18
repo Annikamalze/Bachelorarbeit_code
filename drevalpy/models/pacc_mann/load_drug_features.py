@@ -43,9 +43,6 @@ if __name__ == "__main__":
     data_path = "../../data"
     dataset_name = "GDSC2"
     model = PaccMann()
-    
-    try:
-        feature_dataset = model.load_drug_features(data_path, dataset_name)
-        print("Daten erfolgreich geladen.")
-    except Exception as e:
-        print(f"Es gab einen Fehler: {e}")
+    feature_dataset = model.load_drug_features(data_path, dataset_name)
+    print("Daten erfolgreich geladen.")
+ 
