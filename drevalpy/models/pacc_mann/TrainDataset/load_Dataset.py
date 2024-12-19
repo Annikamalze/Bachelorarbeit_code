@@ -5,7 +5,7 @@ from torch.utils.data import TensorDataset, DataLoader
 # Dateien laden
 gene_expression_path = "/storage/mi/malzea03/Bachelorarbeit_code/data/GDSC2/gene_expression/gene_expression.csv"
 smiles_data_path = "/storage/mi/malzea03/Bachelorarbeit_code/data/processed_smiles_GDSC2.csv"
-drug_sensitivity_path = "/storage/mi/malzea03/Bachelorarbeit_code/data/GDSC2/gdsc-cell-line-name_drug-sensitivity.csv"
+drug_sensitivity_path = "/storage/mi/malzea03/Bachelorarbeit_code/data/GDSC2/gdsc_cell_line_name_drug_sensitivity.csv"
 
 gene_expression = pd.read_csv(gene_expression_path)
 smiles_data = pd.read_csv(smiles_data_path)
