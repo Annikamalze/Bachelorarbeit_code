@@ -96,7 +96,7 @@ class PaccMann(DRPModel):
 def test_load_cell_line_features():
     data_path = "data/GDSC2"
     dataset_name = "gene_expression"
-    gene_list_path = os.path.join(data_path, "2128_genes.csv")
+    gene_list_path = os.path.join(data_path, "2128_genes")
     
     print("Teste Laden der Zelllinienmerkmale...")
     try:
