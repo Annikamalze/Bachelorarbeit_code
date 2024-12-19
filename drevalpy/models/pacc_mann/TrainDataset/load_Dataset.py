@@ -18,7 +18,7 @@ gene_expression.rename(columns={"cellosaurus_id": "cell_line"}, inplace=True)
 merged_data = pd.merge(drug_sensitivity, gene_expression, on="cell_line", how="inner")
 
 # Verknüpfen von SMILES-Daten
-merged_data = pd.merge(merged_data, smiles_data, left_on="drug", right_on="Molecule", how="inner")
+merged_data = pd.merge(merged_data, smiles_data, left_on="drug", right_on="Name", how="inner")
 
 # Relevante Daten extrahieren
 # IC50-Werte als Ziel
