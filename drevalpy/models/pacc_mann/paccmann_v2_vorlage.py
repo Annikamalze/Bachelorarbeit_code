@@ -8,7 +8,7 @@ import os
 from abc import ABC, abstractmethod
 from typing import Any, Optional
 import numpy as np
-#import yaml
+import yaml
 from drevalpy.models.drp_model import DRPModel
 from ..utils import load_and_reduce_gene_features
 from drevalpy.datasets.dataset import FeatureDataset
@@ -22,6 +22,17 @@ class PaccMann(DRPModel):
     It has a boolean attribute is_single_drug_model indicating whether it is a single drug model and a boolean
     attribute early_stopping indicating whether early stopping is used.
     """
+    cell_line_views = ["gene_expression"]
+    drug_views = ["SMILES"]
+
+    def __init__(self):
+        """
+        Initializes the model.
+
+        Sets the model to None, which is initialized in the build_model method to the respective sklearn model.
+        """
+        super().__init__()
+        self.model = None
 
     # Used in the pipeline!
     early_stopping = False
@@ -36,54 +47,14 @@ class PaccMann(DRPModel):
         :return: model name
         """
         return "PaccMann model"
+        
+    def build_model(self, hyperparameters: dict):
+        """
+        Builds the model from hyperparameters.
 
-    #@classmethod
-    #def get_hyperparameter_set(cls) -> list[dict[str, Any]]:
-    #    """
-    #    Loads the hyperparameters from a yaml file which is located in the same directory as the model.
-#
-    #    :returns: list of hyperparameter sets
-    #    :raises ValueError: if the hyperparameters are not in the correct format
-    #    :raises KeyError: if the model is not found in the hyperparameters file
-    #    """
-    #    hyperparameter_file = os.path.join(os.path.dirname(inspect.getfile(cls)), "hyperparameters.yaml")
-#
-    #    with open(hyperparameter_file, encoding="utf-8") as f:
-    #        try:
-    #            hpams = yaml.safe_load(f)[cls.get_model_name()]
-    #        except yaml.YAMLError as exc:
-    #            raise ValueError(f"Error in hyperparameters.yaml: {exc}") from exc
-    #        except KeyError as key_exc:
-    #            raise KeyError(f"Model {cls.get_model_name()} not found in hyperparameters.yaml") from key_exc
-#
-    #    if hpams is None:
-    #        return [{}]
-    #    # each param should be a list
-    #    for hp in hpams:
-    #        if not isinstance(hpams[hp], list):
-    #            hpams[hp] = [hpams[hp]]
-    #    grid = list(ParameterGrid(hpams))
-    #    return grid
-
-    #@property
-    #@abstractmethod
-    #def cell_line_views(self) -> list[str]:
-    #    """
-    #    Returns the sources the model needs as input for describing the cell line.
-
-    #    :return: cell line views, e.g., ["methylation", "gene_expression", "mirna_expression",
-    #        "mutation"]. If the model does not use cell line features, return an empty list.
-    #    """
-
-    #@property
-    #@abstractmethod
-    #def drug_views(self) -> list[str]:
-    #    """
-    #    Returns the sources the model needs as input for describing the drug.
-    #
-    #    :return: drug views, e.g., ["descriptors", "fingerprints", "targets"]. If the model does not use drug features,
-    #        return an empty list.
-    #    """
+        :param hyperparameters: includes units_per_layer and dropout_prob.
+        """
+        self.hyperparameters = hyperparameters
 
     @abstractmethod
     def load_cell_line_features(self, data_path: str, dataset_name: str) -> FeatureDataset:
@@ -119,3 +90,45 @@ class PaccMann(DRPModel):
         :returns: FeatureDataset or None
         """
         return self.load_drug_smiles_features(data_path, dataset_name)
+    
+
+# Testfunktionen
+def test_load_cell_line_features():
+    data_path = "data/GDSC2"
+    dataset_name = "gene_expression"
+    gene_list_path = os.path.join(data_path, "2128_genes.csv")
+    
+    print("Teste Laden der Zelllinienmerkmale...")
+    try:
+        genes = load_and_reduce_gene_features(
+            feature_type="gene_expression",
+            gene_list=gene_list_path,
+            data_path=data_path,
+            dataset_name=dataset_name
+        )
+        if genes:
+            print(f"Erfolgreich Gene geladen: {len(genes)} Gene.")
+        else:
+            print("Keine Gene geladen.")
+    except Exception as e:
+        print(f"Fehler beim Laden der Zelllinienmerkmale: {e}")
+
+def test_load_drug_features():
+    data_path = "data/GDSC2"
+    dataset_name = "GDSC2"
+    
+    print("Teste Laden der Wirkstoffmerkmale...")
+    try:
+        model = PaccMann()
+        feature_dataset = model.load_drug_features(data_path, dataset_name)
+        if feature_dataset:
+            print("Wirkstoffmerkmale erfolgreich geladen.")
+        else:
+            print("Keine Wirkstoffmerkmale geladen.")
+    except Exception as e:
+        print(f"Fehler beim Laden der Wirkstoffmerkmale: {e}")
+
+# Main
+if __name__ == "__main__":
+    test_load_cell_line_features()
+    test_load_drug_features()
