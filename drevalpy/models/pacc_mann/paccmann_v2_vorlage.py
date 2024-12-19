@@ -10,7 +10,7 @@ from typing import Any, Optional
 import numpy as np
 import yaml
 from drevalpy.models.drp_model import DRPModel
-from ..utils import load_and_reduce_gene_features
+from drevalpy.models.utils import load_and_reduce_gene_features
 from drevalpy.datasets.dataset import FeatureDataset
 from model_utils import load_drug_smiles_features
 
