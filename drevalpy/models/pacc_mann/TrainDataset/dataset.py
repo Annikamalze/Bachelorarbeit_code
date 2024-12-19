@@ -21,6 +21,8 @@ merged_data = gene_expression.join(smiles_data, on='cellosaurus_id').join(respon
 X_gene_expression = merged_data.drop(columns=['LN_IC50']).values  # Gene Expression
 X_smiles = merged_data.drop(columns=['LN_IC50']).iloc[:, -154:].values  # Gepaddete SMILES-Daten (154 features)
 y_response = merged_data['LN_IC50'].values  # IC50 als Antwortvariable
+print(X_gene_expression.dtype)
+print(X_gene_expression.shape)
 
 # TensorDataset erstellen
 dataset = torch.utils.data.TensorDataset(torch.tensor(X_gene_expression, dtype=torch.float32), 
